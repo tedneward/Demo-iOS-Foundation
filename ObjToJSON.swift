@@ -22,3 +22,19 @@ let peopleJsonString = String(data: peopleJson, encoding: .utf8)
 print(peopleJsonString!)
 // {{## END multi-object ##}}
 
+// {{## BEGIN codable-encoding ##}}
+struct Person : Codable {
+    let firstName: String
+    let lastName: String
+    //let favoritePhrases: Array<String>
+        // this will trip an error if there isn't a field in the JSON
+}
+let persons = [
+    Person(firstName: "Ted", lastName: "Neward"),
+    Person(firstName: "Charlotte", lastName: "Neward"),
+]
+
+let encoder = JSONEncoder()
+let personsJson = try encoder.encode(persons)
+print(personsJson)
+// {{## END codable-encoding ##}}
